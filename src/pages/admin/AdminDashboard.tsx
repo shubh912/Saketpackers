@@ -17,7 +17,6 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import Seo from '../../components/Seo';
-import supabase from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { BUSINESS } from '../../lib/constants';
 import { WhatsAppGlyph } from '../../components/ContactButtons';
@@ -649,7 +648,6 @@ export default function AdminDashboard() {
   if (!user || !session) return <Navigate to="/admin" replace />;
 
   const signOut = async () => {
-    await supabase?.auth.signOut();
     navigate('/admin', { replace: true });
   };
 

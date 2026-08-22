@@ -2,7 +2,6 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Loader2, AlertTriangle } from 'lucide-react';
 import Seo from '../../components/Seo';
-import supabase from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { BUSINESS } from '../../lib/constants';
 
@@ -21,18 +20,10 @@ export default function AdminLogin() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
-    if (!supabase) {
-      setError('Admin sign-in is not configured on this deployment.');
-      return;
-    }
     setSubmitting(true);
-    const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+    await Promise.resolve();
     setSubmitting(false);
-    if (authError) {
-      setError('Invalid email or password. Please try again.');
-      return;
-    }
-    navigate('/admin/dashboard', { replace: true });
+    setError('Admin sign-in is currently unavailable.');
   };
 
   return (

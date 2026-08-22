@@ -649,7 +649,7 @@ export default function AdminDashboard() {
   if (!user || !session) return <Navigate to="/admin" replace />;
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    await supabase?.auth.signOut();
     navigate('/admin', { replace: true });
   };
 

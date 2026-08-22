@@ -21,6 +21,10 @@ export default function AdminLogin() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
+    if (!supabase) {
+      setError('Admin sign-in is not configured on this deployment.');
+      return;
+    }
     setSubmitting(true);
     const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     setSubmitting(false);

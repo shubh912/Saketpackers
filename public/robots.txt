@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://saket-packers-movers-ayodhya.vercel.app/sitemap.xml

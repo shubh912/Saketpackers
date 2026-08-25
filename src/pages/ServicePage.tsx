@@ -9,7 +9,7 @@ import FaqAccordion from '../components/FaqAccordion';
 import { WhatsAppGlyph } from '../components/ContactButtons';
 import { getService } from '../data/services';
 import { BUSINESS, absUrl } from '../lib/constants';
-import { breadcrumbSchema, serviceSchema } from '../lib/schema';
+import { breadcrumbSchema, faqPageSchema, serviceSchema } from '../lib/schema';
 import { trackEvent } from '../lib/analytics';
 import { goToQuote } from '../lib/quoteNav';
 
@@ -36,6 +36,7 @@ export default function ServicePage({ serviceKey }: ServicePageProps) {
             url: absUrl(service.path),
             image: absUrl(service.image),
           }),
+          faqPageSchema(service.faqs),
           breadcrumbSchema([
             { name: 'Home', url: absUrl('/') },
             { name: 'Services', url: absUrl('/services') },

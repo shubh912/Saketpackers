@@ -54,6 +54,28 @@ export function movingCompanySchema() {
   };
 }
 
+export function organizationSchema() {
+  const origin = siteOrigin();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${origin}/#organization`,
+    name: BUSINESS.name,
+    url: origin,
+    telephone: '+919838494871',
+    logo: `${origin}${BUSINESS.logo}`,
+    sameAs: [BUSINESS.mapsUrl],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: BUSINESS.addressStreet,
+      addressLocality: BUSINESS.addressCity,
+      addressRegion: BUSINESS.addressRegion,
+      postalCode: BUSINESS.addressPin,
+      addressCountry: 'IN',
+    },
+  };
+}
+
 export function websiteSchema() {
   const origin = siteOrigin();
   const idBase = typeof window !== 'undefined' ? origin : SITE_URL;

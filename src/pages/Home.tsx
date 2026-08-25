@@ -27,8 +27,8 @@ import FindUs from '../components/FindUs';
 import FinalCTA from '../components/FinalCTA';
 import { SERVICE_CARD_LIST } from '../data/services';
 import { FAQS } from '../data/faqs';
-import { BUSINESS, SITE_URL } from '../lib/constants';
-import { websiteSchema } from '../lib/schema';
+import { BUSINESS } from '../lib/constants';
+import { organizationSchema, websiteSchema } from '../lib/schema';
 import { trackEvent } from '../lib/analytics';
 import { goToQuote } from '../lib/quoteNav';
 import { WhatsAppGlyph } from '../components/ContactButtons';
@@ -110,7 +110,7 @@ export default function Home() {
         description="Saket Packers and Movers Ayodhya — house shifting, office shifting, packing, loading-unloading, bike transportation and transport services in Ayodhya, UP. Call or WhatsApp 9838494871 for a free quote."
         path="/"
         image={BUSINESS.heroImage}
-        schema={websiteSchema()}
+        schema={[organizationSchema(), websiteSchema()]}
       />
 
       {/* ── Hero ─────────────────────────────────────────── */}

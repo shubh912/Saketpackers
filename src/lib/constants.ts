@@ -1,5 +1,5 @@
-/** Fallback production origin — update this once the final custom domain is mapped. */
-export const SITE_URL = 'https://saket-packers-movers-ayodhya.vercel.app';
+/** Primary public origin used by crawlable URLs and structured data. */
+export const SITE_URL = 'https://saketpackers.vercel.app';
 
 /** Runtime origin (preview domain, custom domain or fallback) for canonical/meta/schema URLs. */
 export function siteOrigin(): string {

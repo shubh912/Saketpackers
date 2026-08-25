@@ -44,6 +44,7 @@ export default function Seo({ title, description, path, image, type, schema, noi
     upsertMeta('property', 'og:description', description);
     upsertMeta('property', 'og:url', url);
     upsertMeta('property', 'og:image', imageUrl);
+    upsertMeta('property', 'og:image:alt', `${BUSINESS.name} moving services in Ayodhya`);
     upsertMeta('property', 'og:type', type || 'website');
     upsertMeta('property', 'og:site_name', BUSINESS.name);
     upsertMeta('property', 'og:locale', 'en_IN');
@@ -51,6 +52,7 @@ export default function Seo({ title, description, path, image, type, schema, noi
     upsertMeta('name', 'twitter:title', title);
     upsertMeta('name', 'twitter:description', description);
     upsertMeta('name', 'twitter:image', imageUrl);
+    upsertMeta('name', 'twitter:image:alt', `${BUSINESS.name} moving services in Ayodhya`);
     upsertMeta('name', 'robots', noindex ? 'noindex, nofollow' : 'index, follow');
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');

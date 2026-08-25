@@ -56,13 +56,26 @@ function parseHistory(value: unknown): ChatMessage[] {
     });
 }
 
+async function upstreamError(response: Response): Promise<string> {
+  try {
+    const data = (await response.json()) as { error?: { message?: string; status?: string } };
+    const message = data.error?.message?.replace(/\s+/g, ' ').trim();
+    const status = data.error?.status?.replace(/[^A-Z_]/g, '');
+    if (message && status) return `${status}: ${message.slice(0, 240)}`;
+    if (message) return message.slice(0, 240);
+  } catch {
+    // Keep the public error safe when Gemini does not return JSON.
+  }
+  return `Gemini returned HTTP ${response.status}`;
+}
+
 export default async function handler(req: RequestLike, res: ResponseLike) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
   if (!apiKey) {
     console.error('GEMINI_API_KEY is not configured');
-    return res.status(503).json({ error: 'Chat is temporarily unavailable. Please call or WhatsApp us.' });
+    return res.status(503).json({ error: 'API configuration error: GEMINI_API_KEY is not configured.' });
   }
 
   try {
@@ -77,10 +90,10 @@ export default async function handler(req: RequestLike, res: ResponseLike) {
     }
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
           contents: [...parseHistory(body.history), { role: 'user', parts: [{ text: message }] }].slice(
@@ -92,15 +105,16 @@ export default async function handler(req: RequestLike, res: ResponseLike) {
     );
 
     if (!response.ok) {
-      console.error('Gemini API returned', response.status);
-      return res.status(502).json({ error: 'I could not respond right now. Please call or WhatsApp us.' });
+      const detail = await upstreamError(response);
+      console.error('Gemini API returned', response.status, detail);
+      return res.status(502).json({ error: `Gemini API error (${response.status}): ${detail}` });
     }
 
     const data = (await response.json()) as {
       candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
     };
     const reply = data.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('').trim();
-    if (!reply) return res.status(502).json({ error: 'I could not respond right now. Please call or WhatsApp us.' });
+    if (!reply) return res.status(502).json({ error: 'Gemini API returned no response content.' });
 
     return res.status(200).json({ reply: reply.slice(0, 1200) });
   } catch (error) {

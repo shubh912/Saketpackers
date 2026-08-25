@@ -7,7 +7,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import MobileCTABar from './components/MobileCTABar';
 import WhatsAppFloat from './components/WhatsAppFloat';
-import Chatbot from './components/Chatbot';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -73,7 +72,6 @@ function SiteChrome() {
       <Footer />
       <MobileCTABar />
       <WhatsAppFloat />
-      <Chatbot />
     </div>
   );
 }

@@ -16,7 +16,7 @@ type ResponseLike = {
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_HISTORY_MESSAGES = 10;
 const MAX_REQUEST_LENGTH = 16_000;
-const MODEL = 'gemini-2.5-flash';
+const MODEL = 'gemini-3.6-flash';
 
 const SYSTEM_INSTRUCTION = `You are the official AI assistant for Saket Packers & Movers, Ayodhya.
 Website: https://saketpackers.vercel.app/

@@ -14,6 +14,19 @@ import {
   Building2,
   Package,
   Car,
+  import { generateReview } from './reviewGenerator';
+
+// ... rest of your component ...
+
+const createReview = () => {
+  setIsGenerating(true);
+  setCopied(false);
+  setTimeout(() => {
+    const generated = generateReview(service, selectedKeywords, rating);
+    setReview(generated);
+    setIsGenerating(false);
+  }, 250);
+};
 } from 'lucide-react';
 
 const GOOGLE_REVIEW_URL =

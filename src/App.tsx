@@ -28,7 +28,10 @@ function AdminArea() {
       <Suspense
         fallback={
           <div className="flex min-h-screen items-center justify-center bg-navy-950">
-            <Loader2 className="h-8 w-8 animate-spin text-gold-400" aria-label="Loading admin" />
+            <Loader2
+              className="h-8 w-8 animate-spin text-gold-400"
+              aria-label="Loading admin"
+            />
           </div>
         }
       >
@@ -44,19 +47,30 @@ function AdminArea() {
 
 function SiteChrome() {
   const { pathname } = useLocation();
+
   const isAdmin = pathname.startsWith('/admin');
+  const isReview = pathname === '/review';
 
   if (isAdmin) return <AdminArea />;
+
+  // Review page is completely standalone.
+  // It will NOT show the normal website header, footer,
+  // WhatsApp button, or mobile CTA bar.
+  if (isReview) return <Review />;
 
   return (
     <div className="page-shell flex min-h-screen flex-col">
       <TopBar />
       <Header />
+
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/about" element={<About />} />
+
           <Route path="/services" element={<Services />} />
+
           {SERVICES.map((service) => (
             <Route
               key={service.key}
@@ -64,15 +78,21 @@ function SiteChrome() {
               element={<ServicePage serviceKey={service.key} />}
             />
           ))}
+
           <Route path="/gallery" element={<Gallery />} />
+
           <Route path="/faq" element={<Faq />} />
+
           <Route path="/contact" element={<Contact />} />
-          <Route path="/review" element={<Review />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+
       <Footer />
+
       <MobileCTABar />
+
       <WhatsAppFloat />
     </div>
   );

@@ -1,4 +1,4 @@
-```tsx
+
 import { useMemo, useState } from 'react';
 import {
   Star,
@@ -903,4 +903,3 @@ export default function Review() {
     </div>
   );
 }
-```

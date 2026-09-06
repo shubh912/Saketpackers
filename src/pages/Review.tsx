@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 const GOOGLE_REVIEW_URL =
-  "https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID";
+  "https://search.google.com/local/writereview?placeid=ChIJA4Rb4RYHmjkRgRUAjvI9Mg8";
 
 const services = [
   "House Shifting",

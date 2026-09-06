@@ -1,4 +1,3 @@
-
 import { useMemo, useState } from 'react';
 import {
   Star,
@@ -14,7 +13,8 @@ import {
   Building2,
   Package,
   Car,
-  import { generateReview } from './reviewGenerator';
+} from 'lucide-react';
+import { generateReview } from './reviewGenerator'; // adjust path if needed
 
 // ... rest of your component ...
 
@@ -27,7 +27,6 @@ const createReview = () => {
     setIsGenerating(false);
   }, 250);
 };
-} from 'lucide-react';
 
 const GOOGLE_REVIEW_URL =
   'https://search.google.com/local/writereview?placeid=ChIJA4Rb4RYHmjkRgRUAjvI9Mg8';

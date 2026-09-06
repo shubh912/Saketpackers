@@ -14,7 +14,7 @@ import {
   Package,
   Car,
 } from 'lucide-react';
-import { generateReview } from './reviewGenerator'; // adjust path if needed
+import { generateReview } from '../lib/reviewGenerator';
 
 const GOOGLE_REVIEW_URL =
   'https://search.google.com/local/writereview?placeid=ChIJA4Rb4RYHmjkRgRUAjvI9Mg8';

@@ -14,6 +14,7 @@ import ServicePage from './pages/ServicePage';
 import Gallery from './pages/Gallery';
 import Faq from './pages/Faq';
 import Contact from './pages/Contact';
+import Review from './pages/Review';
 import NotFound from './pages/NotFound';
 import { SERVICES } from './data/services';
 import { Loader2 } from 'lucide-react';
@@ -66,6 +67,7 @@ function SiteChrome() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/review" element={<Review />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
